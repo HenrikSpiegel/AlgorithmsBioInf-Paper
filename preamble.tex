@@ -1,0 +1,46 @@
+\usepackage[utf8]{inputenc}
+
+% ref packages
+\usepackage{nameref}
+\usepackage[]{biblatex}
+% following  must be in this order
+\usepackage{hyperref}
+%\usepackage{parskip}    % pænere design (ingen indent)
+\usepackage{fancyhdr}   % fancy layout
+\usepackage{parcolumns} % minipage
+\usepackage{tabu,longtable} % <tabeller>
+\usepackage{makecell}  % Allows for \makecell{..\\..} splitting of cells in tabels
+\usepackage{adjustbox}
+\usepackage{multirow,multicol}
+\usepackage{booktabs}
+\usepackage{tabularx,dcolumn} %</tabeller>
+\usepackage{float,subfig}
+\usepackage{setspace} % \singlespacing/doublespacing
+\usepackage{amsmath,amssymb} % math <3
+\usepackage[paper=a4paper,top=3cm, bottom=3cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{textcomp} %\micro + \perthousand
+\usepackage{gensymb} %Gradtegn brug: \degree
+\usepackage{tikz} % Til billede på forsiden - Så der er et billede
+\usepackage{array}  % Til billede på forsiden - Så billede er i bunden
+\usepackage{tabto} %NumTabs - Til billede på forsiden
+\itshape\urlstyle{same} % url links ser ikke dumme ud
+\usepackage{color}
+\usepackage{listings}   % For at skrive kode
+\usepackage{wrapfig} % ombryd tekst for figurer
+\lstset{ 
+frame=single,
+rulecolor=\color{black},
+language=Python,
+}
+
+
+\newcommand{\HRule}{\vspace{-15pt}\rule{\linewidth}{0.5mm}}% Defines a new command for the horizontal lines, change thickness here
+\newcommand{\blankpage}{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\lhead{} 
+\rhead{\nouppercase{\leftmark}}
