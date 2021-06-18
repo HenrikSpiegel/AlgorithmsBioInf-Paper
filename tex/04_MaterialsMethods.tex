@@ -12,6 +12,7 @@
 \noindent
 \textbf{Sequence encoding:} The sequence used in the HMM must be encoded so that each symbol in the sequence $\in [0,n-1]$ where n denotes the number of unique symbols in the sequence. This allows the model to use the symbol encoding as index for the emission matrix described in \autoref{subsec:BW}. Thus, in the case of a die toss the results will be encoded as a number between 0 and 5.
 
+\noindent
 \textbf{Generation of sequences}: In order to test our implementation a small sequence generator was created which generates a sequence of specified length using set parameters for initial distribution, transition, and emission matrices.
 
 \subsection{Model Architecture} 
