@@ -172,9 +172,11 @@ This is done by setting one model as reference and then permutating the order of
 
 
 \subsection{Overview of Model Architecture} 
-First, transition, emission, and state distribution matrices are simulated after the und
-An overview of our model architecture is visualized in \autoref{fig:set_up}. 
+An overview of our model architecture is visualised in \autoref{fig:set_up}. First, transition, emission, and state distribution matrices are simulated to resemble the unfair casino problem. These matrices are then used to create a number of artificial sequences representing die tosses. The majority of the sequences are used as training data, whereas a smaller part of the sequences are used as testing data. 
 
+In order to test the robustness of the model, seven models are run independently on the same training data, having different initiations of the parameters. This gives seven different sets of optimal model parameters. An ensemble model was also computed based on the seven models.
+
+Two different approaches were used to evaluate the model performance. (1) The mean-squared-error (MSE) between the estimated parameters and the simulated parameters is calculated for each model and for the ensemble model. (2) For each model, including the ensemble model, the average likelihood of all sequences in the test data is computed by running the sequences through the forward algorithm. The evaluation measurements are finally plotted.
 
 \begin{figure}[H]
     \centering
