@@ -174,7 +174,7 @@ This is done by setting one model as reference and then permutating the order of
 \subsection{Overview of Model Architecture} 
 An overview of our model architecture is visualised in \autoref{fig:set_up}. First, transition, emission, and state distribution matrices are simulated to resemble the unfair casino problem. These matrices are then used to create a number of artificial sequences representing die tosses. The majority of the sequences are used as training data, whereas a smaller part of the sequences are used as testing data. 
 
-In order to test the robustness of the model, seven models are run independently on the same training data, having different initiations of the parameters. This gives seven different sets of optimal model parameters. An ensemble model was also computed based on the seven models.
+In order to test the robustness of the model, seven models are run independently on the same training data, having different initiations of the parameters. This gives seven different sets of optimal model parameters. \autoref{fig:baum_w} visualises our setup of the Baum-Welch algorithm that yields the optimal model parameters. An ensemble model was also computed based on the seven models.
 
 Two different approaches were used to evaluate the model performance. (1) The mean-squared-error (MSE) between the estimated parameters and the simulated parameters is calculated for each model and for the ensemble model. (2) The average negative log-likelihood of the sequences in the test data is computed by running the sequences through the forward algorithm, for each of the models and for the ensemble model. The evaluation measurements are finally plotted.
 
@@ -185,11 +185,12 @@ Two different approaches were used to evaluate the model performance. (1) The me
     \label{fig:set_up}
 \end{figure}
 
-An overview of the Baum-Welch algorithm set-up is visualised in \autoref{fig}. 
+An overview of the Baum-Welch algorithm set-up is visualised in \autoref{fig:baum_w}. 
 \begin{figure}[H]
     \centering
-    \includegraphics[width = 0.95\textwidth]{fig/baum_welch.png}
+    \includegraphics[width = 0.9\textwidth]{fig/baum_welch.png}
     \caption{Overview of the Baum-Welch algorithm. \textit{Homemade}.}
-    \label{fig:BW}
+    \label{fig:baum_w}
 \end{figure}
 
+% ved ikke om vi behøver flere kommentarer til BW?
