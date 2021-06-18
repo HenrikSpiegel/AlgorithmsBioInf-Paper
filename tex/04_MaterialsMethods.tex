@@ -15,15 +15,8 @@
 \noindent
 \textbf{Generation of sequences}: In order to test our implementation a small sequence generator was created which generates a sequence of specified length using set parameters for initial distribution, transition, and emission matrices.
 
-\subsection{Model Architecture} 
-% Figur
-
-
-% individual models, ensemble
 
 \subsection{Baum-Welch} \label{subsec:BW}
-
-
 \subsubsection{Initial model parameters}
 The Baum-Welch algorithm has to be initialised with values for the emission, transition and initial state matrices. The starting values are important as the BW algorithm will not be able to escape local extrema. In our case we chose to initialise the model with equal rates for all transition events and equal probability for intial state. Furthermore, the emission matrix was initialised with uniformly distributed random values for the emission rates normalised so they summed to one within each state. 
 
@@ -178,8 +171,16 @@ This is done by setting one model as reference and then permutating the order of
 % After model run, calculate forward on sequences with found model parameters to test how probable our our data is, given the found parameters
 
 
+\subsection{Overview of Model Architecture} 
+First, transition, emission, and state distribution matrices are simulated after the und
+An overview of our model architecture is visualized in \autoref{fig:set_up}. 
 
 
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 1.1\textwidth]{fig/set_up.png}
+    \caption{Overview over the model set up.}
+    \label{fig:set_up}
+\end{figure}
 
 
