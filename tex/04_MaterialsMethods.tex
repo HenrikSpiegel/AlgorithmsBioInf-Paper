@@ -15,15 +15,8 @@
 \noindent
 \textbf{Generation of sequences}: In order to test our implementation a small sequence generator was created which generates a sequence of specified length using set parameters for initial distribution, transition, and emission matrices.
 
-\subsection{Model Architecture} 
-% Figur
-
-
-% individual models, ensemble
 
 \subsection{Baum-Welch} \label{subsec:BW}
-
-
 \subsubsection{Initial model parameters}
 The Baum-Welch algorithm has to be initialised with values for the emission, transition and initial state matrices. The starting values are important as the BW algorithm will not be able to escape local extrema. In our case we chose to initialise the model with equal rates for all transition events and equal probability for intial state. Furthermore, the emission matrix was initialised with uniformly distributed random values for the emission rates normalised so they summed to one within each state. 
 
@@ -178,8 +171,18 @@ This is done by setting one model as reference and then permutating the order of
 % After model run, calculate forward on sequences with found model parameters to test how probable our our data is, given the found parameters
 
 
+\subsection{Overview of Model Architecture} 
+An overview of our model architecture is visualised in \autoref{fig:set_up}. First, transition, emission, and state distribution matrices are simulated to resemble the unfair casino problem. These matrices are then used to create a number of artificial sequences representing die tosses. The majority of the sequences are used as training data, whereas a smaller part of the sequences are used as testing data. 
 
+In order to test the robustness of the model, seven models are run independently on the same training data, having different initiations of the parameters. This gives seven different sets of optimal model parameters. An ensemble model was also computed based on the seven models.
 
+Two different approaches were used to evaluate the model performance. (1) The mean-squared-error (MSE) between the estimated parameters and the simulated parameters is calculated for each model and for the ensemble model. (2) For each model, including the ensemble model, the average likelihood of all sequences in the test data is computed by running the sequences through the forward algorithm. The evaluation measurements are finally plotted.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 1.1\textwidth]{fig/set_up.png}
+    \caption{Overview over the model set up.}
+    \label{fig:set_up}
+\end{figure}
 
 
