@@ -1,0 +1,68 @@
+% Introduce what HMM/B.W. is used for / what problems it can solve
+% What is HMM + its scope
+% Baum welch, forward-backward - what they do / how they work (brief)
+% We use it on the unfair casino - general 
+
+\section{Introduction}
+Many problems in the field of bioinformatics, such as sequence alignment and identifying protein sequence motifs, can be addressed with the use of artificial intelligence. Often, labelled data with a known outcome is not available to train predictive models on. In such cases, unsupervised machine learning is widely used. 
+
+A Hidden Markov Model (HMM) is a probabilistic model that can be used to derive unobserved information from observed data - unsupervised learning, c.f. \autoref{intro.hmm}. A typical biological problem to solve using HMMs could for example be to find which amino acids that are important for different specific regions of a protein or a protein family, e.g. the extracellular, trans-membrane, and intracellular regions of the protein. This means that given the observed protein sequences, it is possible to estimate which position-specific amino acids that are most probably located in, and hence maybe important for, the different regions or states in the protein. 
+
+To solve such problem, we implement the Baum-Welch algorithm, c.f. \autoref{intro.baum_welch}. The Baum-Welch algorithm is implemented on the problem of an unfair casino, a simple problem to illustrate the concepts of the method. In this problem, there are two states representing a fair and an unfair die. The scope of the algorithm is to estimate the probabilities of tossing each number using each of the two dice, as well as the probability of shifting between dice. These so-called emission and transition probabilities can be used to reveal underlying patterns in the observed sequences. In the case of the unfair casino problem, the algorithm should find that there is $\frac{1}{6}$ probability for tossing each of the numbers on the fair die, whereas it should find a low probability for tossing the numbers one to five and a higher probability for tossing six, using the unfair die. 
+
+
+\subsection{The Hidden Markov Model} \label{intro.hmm}
+% Lav figur af to states og deres transitions
+
+The Hidden Markov Model (HMM) algorithm can be used to predict which of the different states (fair or unfair die) that has most likely been used for each toss in a sequence of tosses with length $T$, given we know the before mentioned transition and emission probabilities, as well as an initial probability distribution of the different states. For Hidden Markov Models, the future state solely depends on the current state. 
+
+The transition probabilities for shifting between all of the M states including shifting to the same state, are stored in a $M\times M$ transition matrix, where $a_{ij}$ is the probability of transiting from state i to state j: 
+\begin{equation*}
+    A = 
+    \begin{bmatrix}
+        a_{ii} & a_{ij} \\
+        a_{ji} & a_{jj}
+    \end{bmatrix}
+\end{equation*}
+The sum of all transition probabilities given the current state equals to 1, meaning that $a_{ii}+a_{ij} = 1$. All the transition probability values are constant over time (for all observations in the sequences), and can be written as
+$a_{ij} = p(m_{t+1} = j | m_{t} = i)$, where $m_t$ is the state at position $t$ in the sequence.  
+
+The emission probabilities gives the likelihood for a given observation (toss), and are stored in an $M \times T$ emission matrix:
+\begin{equation*}
+    B = 
+    \begin{bmatrix}
+        b_{ii} & b_{ij} & b_{ik}\\
+        b_{ji} & b_{jj} & b_{jk}
+    \end{bmatrix}
+\end{equation*}
+Here, $b_{ij}$ represents the probability of an observation at state j being generated from state i. Also the emission probabilities are constant over time, and can be written as $b_{ij} = p(X_{t+1} = j | X_{t} = i)$, where $X_t$ is the observation at position $t$ in the sequence. Also for the emission matrix it is valid that the sum of all emission probabilities given the current state should equal to 1.
+
+The probability distribution of the initial states are needed in order to estimate the probabilities of the subsequent tosses, and are often randomly or arbitrarily defined. They are stored in a vector of length $M$, where $p_{i}$ is the initial probability of state i:
+\begin{equation*}
+    \pi = 
+    \begin{bmatrix}
+        p_{i}\\
+        p_{j}
+    \end{bmatrix}
+\end{equation*}
+
+Given the above HMM parameters, it is possible to estimate the probability of an observed sequence $X$ using the forward algorithm, which sums over all paths giving rise to the sequence, as described in \autoref{method.forward}. It is also possible to calculate the probability that a specific observation $x_i$ in sequence $X$ came from a specific state, $k$. This means that you can calculate the probability of seeing the observations from time $t+1$ to the end of the sequence, using the backward algorithm, as described in \autoref{method.backward}. 
+The forward and backward algorithms are besides part of the learning algorithm, Baum-Welch.
+
+
+
+\subsection{The Baum-Welch Algorithm} \label{intro.baum_welch}
+% Theory
+The Baum-Welch algorithm is a method whereby we can learn the parameters of the HMM, the transition and emission matrices, given one or more observation sequences. The algorithm thus finds the values of the parameters that will most likely produce the observed data. Such learning is unsupervised.
+
+The algorithm is learning iteratively, meaning that it, based on some initial estimate of the parameters, computes a better estimate. This proceeds until some stopping criteria is met, e.g. after a specified number of iterations where the model has hopefully converged.
+
+For each iteration, the algorithm updates the parameters such that they maximize the probability of the observation. As there is no way in which the algorithm will make a parameter update that does not maximize the probability of the observation, and as the probability estimations are dependent on the initial parameter values, which are often randomly computed, the algorithm may converge towards a local minima rather than the global minima. 
+
+
+% Flytte op fra methods??
+
+
+
+
+
